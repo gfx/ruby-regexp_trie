@@ -22,7 +22,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'regexp_trie'
+rt = RegexpTrie.new;
+rt.add_all(*%w(foobar fooxar foozap fooza/))
+puts $rt.to_regexp # (?-xism:foo(?:bar|xar|zap?))
+```
+
+See also the original [Regexp::Trie in Perl](https://metacpan.org/pod/Regexp::Trie).
 
 ## Development
 
@@ -38,4 +45,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
