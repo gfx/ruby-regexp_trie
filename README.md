@@ -46,6 +46,11 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/gfx/regexp_trie.
 
+## See Also
+
+* https://metacpan.org/pod/Regexp::Assemble
+* https://metacpan.org/pod/Regexp::Trie
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
