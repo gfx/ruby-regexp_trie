@@ -1,19 +1,25 @@
+#!/usr/bin/env ruby
 require 'benchmark'
+require 'diffy'
 require 'regexp_trie'
 
 keywords = []
-
-File.open('example/hatena-keyword-list.csv', 'r:UTF-8') do |io|
+File.open('example/hatena-keyword-list.csv') do |io|
   io.each do |line|
     yomi, word = line.split(/\t/)
-    keywords.push(word.strip)
+    word.strip!
+    unless word.empty?
+      keywords.push(word)
+    end
   end
 end
 
 puts "build regexp ..."
 
-rx_raw = Regexp.new("(?:#{keywords.map { |w| Regexp.escape(w) }.join('|')})")
-rx_trie = RegexpTrie.new.add_all(keywords).to_regexp
+keywords.sort_by! { |item| -item.length }
+
+rx_raw = Regexp.union(keywords)
+rx_trie = RegexpTrie.union(keywords)
 
 puts "rx_raw:  #{rx_raw.to_s.length}"
 puts "rx_trie: #{rx_trie.to_s.length}"
@@ -69,15 +75,16 @@ Darts版ほどとは行きませんが、なかなかPracticalなのではない
 Dan the Just Another (Perl|Trie) Hacker
 EOS
 
-unless text.gsub(rx_raw, 'XXX') == text.gsub(rx_trie, 'XXX')
-  puts 'Not good!'
+unless text.gsub(rx_raw, '*') == text.gsub(rx_trie, '*')
+  puts '!!!differences between Regexp.union() and RegexpTrie.union()!!!'
+  puts Diffy::Diff.new(text.gsub(rx_raw, '*'), text.gsub(rx_trie, '*'))
 end
 
 Benchmark.bm 20 do |r|
   r.report "Regexp raw" do
-    text.gsub(rx_raw, 'XXX')
+    text.gsub(rx_raw, '*')
   end
   r.report "RegexpTrie" do
-    text.gsub(rx_trie, 'XXX')
+    text.gsub(rx_trie, '*')
   end
 end
