@@ -1,26 +1,6 @@
 # RegexpTrie
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/regexp_trie`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'regexp_trie'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install regexp_trie
-
-## Usage
+## Synopsis
 
 ```ruby
 require 'regexp_trie'
@@ -31,6 +11,20 @@ puts $rt.to_regexp # (?-xism:foo(?:bar|xar|zap?))
 
 See also the original [Regexp::Trie in Perl](https://metacpan.org/pod/Regexp::Trie).
 
+## Description
+
+RegexpTrie takes an arbitrary number of regular expressions and assembles them into a single regular expression (or RE) that matches all that the individual REs match.
+
+In other words, this library provides a limited but optimized version of `Regexp.union()`.
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'regexp_trie'
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -39,8 +33,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/regexp_trie.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/gfx/regexp_trie.
 
 ## License
 
