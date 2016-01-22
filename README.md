@@ -3,13 +3,16 @@
 ## Synopsis
 
 ```ruby
+#!/usr/bin/env ruby
 require 'regexp_trie'
 # like Regexp.union()
 p RegexpTrie.union(%w(foobar fooxar foozap fooza)) # (?-mix:foo(?:bar|xar|zap?))
 
 # or object-oriented interface
-rt = RegexpTrie.new;
-rt.add_all(*%w(foobar fooxar foozap fooza))
+rt = RegexpTrie.new
+%w(foobar fooxar foozap fooza).each do |word|
+  rt.add(word)
+end
 p rt.to_regexp # (?-mix:foo(?:bar|xar|zap?))
 ```
 

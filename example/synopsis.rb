@@ -1,4 +1,11 @@
+#!/usr/bin/env ruby
 require 'regexp_trie'
-rt = RegexpTrie.new;
-rt.add_all(*%w(foobar fooxar foozap fooza))
-puts rt.to_regexp # (?-mix:foo(?:bar|xar|zap?))
+# like Regexp.union()
+p RegexpTrie.union(%w(foobar fooxar foozap fooza)) # /foo(?:bar|xar|zap?)/
+
+# or object-oriented interface
+rt = RegexpTrie.new
+%w(foobar fooxar foozap fooza).each do |word|
+  rt.add(word)
+end
+p rt.to_regexp # /foo(?:bar|xar|zap?)/
