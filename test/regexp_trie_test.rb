@@ -1,18 +1,23 @@
 require 'test_helper'
 
 class RegexpTrieTest < Minitest::Test
-  def regexp
-    RegexpTrie.union("foo", "bar", "baz")
-  end
 
-  def test_that_it_has_a_version_number
+  def test_version_number
     refute_nil ::RegexpTrie::VERSION
   end
 
   def test_union
-    assert { regexp === "foo" }
-    assert { regexp === "bar" }
-    assert { regexp === "baz" }
+    re = RegexpTrie.union("foo", "bar", "baz")
+    assert { re === "foo" }
+    assert { re === "bar" }
+    assert { re === "baz" }
+    assert { !(re === "FOO") }
+  end
+
+  def test_union_ignorecase
+    re = RegexpTrie.union("foo", "bar", "baz", option: Regexp::IGNORECASE)
+    assert { re === 'foo' }
+    assert { re === 'FOO' }
   end
 
   def test_instance
