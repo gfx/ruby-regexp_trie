@@ -26,7 +26,7 @@ class RegexpTrie
       entry[c] ||= {}
       entry = entry[c]
     end
-    entry[''] = true # terminator
+    entry[:end] = true
     self
   end
 
@@ -42,7 +42,7 @@ class RegexpTrie
   private
 
   def build(entry)
-    return nil if entry[''] && entry.size == 1
+    return nil if entry[:end] && entry.size == 1
 
     alt = []
     cc = []

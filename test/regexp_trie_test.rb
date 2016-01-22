@@ -6,12 +6,21 @@ class RegexpTrieTest < Minitest::Test
     refute_nil ::RegexpTrie::VERSION
   end
 
-  def test_union
+  def test_union_1
     re = RegexpTrie.union("foo", "bar", "baz")
     assert { re === "foo" }
     assert { re === "bar" }
     assert { re === "baz" }
     assert { !(re === "FOO") }
+  end
+
+  def test_union_2
+    re = RegexpTrie.union("foo", "foobar", "foobaz")
+    assert { re === "foo" }
+    assert { re === "foobar" }
+    assert { re === "foobaz" }
+    assert { !(re === "bar") }
+    assert { !(re === "baz") }
   end
 
   def test_union_ignorecase
