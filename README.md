@@ -49,3 +49,5 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/gfx/re
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+The original code is @dankogai's [Regexp::Trie](https://metacpan.org/pod/Regexp::Trie).
