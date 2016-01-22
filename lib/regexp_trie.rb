@@ -2,16 +2,26 @@ require_relative "regexp_trie/version"
 
 class RegexpTrie
 
+  # @param [Array<String>] strings
+  # @return [Regexp]
+  def self.union(*strings)
+    rt = new
+    strings.flatten.each do |arg|
+      rt.add(arg)
+    end
+    rt.to_regexp
+  end
+
   def initialize
     @head = {}
   end
 
-  # @param [String] str
+  # @param [String] pattern
   def add(str)
     return self unless str && str.size > 0
 
     entry = @head
-    str.chars.each do |c|
+    str.each_char do |c|
       entry[c] ||= {}
       entry = entry[c]
     end
@@ -19,30 +29,28 @@ class RegexpTrie
     self
   end
 
-  # @param [Enumerable] args
-  def add_all(*args)
-    args.each do |arg|
-      add(arg)
-    end
-    self
-  end
-
   # @return [Regexp]
   def to_regexp
-    Regexp.new(_build(@head))
+    if @head.empty?
+      Regexp.union
+    else
+      Regexp.new(build(@head))
+    end
   end
 
-  def _build(entry)
+  private
+
+  def build(entry)
     return nil if entry[''] && entry.size == 1
 
     alt = []
     cc = []
     q = false
 
-    entry.keys.sort.each do |c|
-      qc = Regexp.quote(c)
+    entry.keys.each do |c|
       if entry[c].kind_of?(Hash)
-        recurse = _build(entry[c])
+        recurse = build(entry[c])
+        qc = Regexp.quote(c)
         if recurse
           alt.push(qc + recurse)
         else
