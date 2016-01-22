@@ -23,6 +23,14 @@ class RegexpTrieTest < Minitest::Test
     assert { !(re === "baz") }
   end
 
+  def test_union_flatten
+    re = RegexpTrie.union(["foo", "bar"], ["hoge", "fuga"])
+    assert { re === "foo" }
+    assert { re === "bar" }
+    assert { re === "hoge" }
+    assert { re === "fuga" }
+  end
+
   def test_union_ignorecase
     re = RegexpTrie.union("foo", "bar", "baz", option: Regexp::IGNORECASE)
     assert { re === 'foo' }
