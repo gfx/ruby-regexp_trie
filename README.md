@@ -4,9 +4,13 @@
 
 ```ruby
 require 'regexp_trie'
+# like Regexp.union()
+p RegexpTrie.union(%w(foobar fooxar foozap fooza)) # (?-mix:foo(?:bar|xar|zap?))
+
+# or object-oriented interface
 rt = RegexpTrie.new;
 rt.add_all(*%w(foobar fooxar foozap fooza))
-puts rt.to_regexp # (?-mix:foo(?:bar|xar|zap?))
+p rt.to_regexp # (?-mix:foo(?:bar|xar|zap?))
 ```
 
 See also the original [Regexp::Trie in Perl](https://metacpan.org/pod/Regexp::Trie).
@@ -24,6 +28,10 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'regexp_trie'
 ```
+
+## Known Issues
+
+This is not perfectly compatible with `Regexp.union()`.
 
 ## Development
 
