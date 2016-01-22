@@ -17,7 +17,7 @@ class RegexpTrie
     @head = {}
   end
 
-  # @param [String] pattern
+  # @param [String] str
   def add(str)
     return self unless str && str.size > 0
 
