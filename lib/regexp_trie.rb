@@ -2,14 +2,15 @@ require_relative "regexp_trie/version"
 
 class RegexpTrie
 
-  # @param [Array<String>] strings
+  # @param [Array<String>] strings Set of patterns
+  # @param [Fixnum,Boolean] option The second argument of Regexp.new()
   # @return [Regexp]
-  def self.union(*strings)
+  def self.union(*strings, option: nil)
     rt = new
     strings.flatten.each do |arg|
       rt.add(arg)
     end
-    rt.to_regexp
+    rt.to_regexp(option)
   end
 
   def initialize
@@ -30,11 +31,11 @@ class RegexpTrie
   end
 
   # @return [Regexp]
-  def to_regexp
+  def to_regexp(option = nil)
     if @head.empty?
       Regexp.union
     else
-      Regexp.new(build(@head))
+      Regexp.new(build(@head), option)
     end
   end
 
