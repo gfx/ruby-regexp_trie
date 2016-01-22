@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 require 'regexp_trie'
+
 # like Regexp.union()
 p RegexpTrie.union(%w(foobar fooxar foozap fooza)) # /foo(?:bar|xar|zap?)/
+p RegexpTrie.union(%w(foobar fooxar foozap fooza), option: Regexp::IGNORECASE) # /foo(?:bar|xar|zap?)/i
 
 # or object-oriented interface
 rt = RegexpTrie.new
