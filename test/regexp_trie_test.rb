@@ -37,6 +37,18 @@ class RegexpTrieTest < Minitest::Test
     assert { re === 'FOO' }
   end
 
+  def test_union_rx
+    assert { RegexpTrie.union('a') == /a/ }
+    assert { RegexpTrie.union('a', 'aa') == /aa?/ }
+    assert { RegexpTrie.union('a', 'b') == /[ab]/ }
+    assert { RegexpTrie.union('foo', 'bar') == /(?:foo|bar)/ }
+    assert { RegexpTrie.union('foo', 'bar', 'baz') == /(?:foo|ba[rz])/ }
+  end
+
+  def test_union_empty
+    assert { RegexpTrie.union == Regexp.union }
+  end
+
   def test_instance
     rt = RegexpTrie.new.add("foo").add("bar").add("baz")
     assert { rt.to_regexp == %r/(?:foo|ba[rz])/ }
