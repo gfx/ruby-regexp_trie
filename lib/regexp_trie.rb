@@ -26,7 +26,7 @@ class RegexpTrie
       entry[c] ||= {}
       entry = entry[c]
     end
-    entry[:end] = true
+    entry[:end] = nil
     self
   end
 
@@ -42,14 +42,14 @@ class RegexpTrie
   private
 
   def build(entry)
-    return nil if entry[:end] && entry.size == 1
+    return nil if entry.include?(:end) && entry.size == 1
 
     alt = []
     cc = []
     q = false
 
     entry.keys.each do |c|
-      if entry[c].kind_of?(Hash)
+      if entry[c]
         recurse = build(entry[c])
         qc = Regexp.quote(c)
         if recurse
