@@ -15,12 +15,16 @@ class RegexpTrieTest < Minitest::Test
   end
 
   def test_union_2
-    re = RegexpTrie.union("foo", "foobar", "foobaz")
+    re = /\b#{RegexpTrie.union("foo", "foobar", "foobaz")}\b/
     assert { re === "foo" }
     assert { re === "foobar" }
     assert { re === "foobaz" }
+    assert { re === "text foo text" }
+    assert { re === "text foobar text" }
+    assert { re === "text foobaz text" }
     assert { !(re === "bar") }
     assert { !(re === "baz") }
+    assert { !(re === "text foobax text") }
   end
 
   def test_union_flatten
