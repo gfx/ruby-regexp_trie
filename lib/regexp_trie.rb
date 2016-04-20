@@ -72,7 +72,7 @@ class RegexpTrie
       if cconly
         "#{result}?"
       else
-        "(?:#{$result})?"
+        "(?:#{result})?"
       end
     else
       result
