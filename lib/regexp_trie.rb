@@ -6,20 +6,20 @@ class RegexpTrie
   # @param [Fixnum,Boolean] option The second argument of Regexp.new()
   # @return [Regexp]
   def self.union(*strings, option: nil)
-    rt = new
-    strings.flatten.each do |arg|
-      rt.add(arg)
-    end
-    rt.to_regexp(option)
+    new(*strings).to_regexp(option)
   end
 
-  def initialize
+  def initialize(*strings)
     @head = {}
+
+    strings.flatten.each do |str|
+      add(str)
+    end
   end
 
   # @param [String] str
   def add(str)
-    return self unless str && str.size > 0
+    return self if !str || str.empty?
 
     entry = @head
     str.each_char do |c|
@@ -30,13 +30,18 @@ class RegexpTrie
     self
   end
 
+  # @return [String]
+  def to_source
+    if @head.empty?
+      Regexp.union.source
+    else
+      build(@head)
+    end
+  end
+
   # @return [Regexp]
   def to_regexp(option = nil)
-    if @head.empty?
-      Regexp.union
-    else
-      Regexp.new(build(@head), option)
-    end
+    Regexp.new(to_source, option)
   end
 
   private
