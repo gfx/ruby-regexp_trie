@@ -1,5 +1,9 @@
 Revision history of the RegexpTrie gem
 
+## v1.0.1 - 2018/10/09
+
+* Add `# frozen_string_literal: true` to source files
+
 ## v1.0.0 - 2016/11/14
 
 - Add a method to get the union pattern as `String`, not as `Regexp`
