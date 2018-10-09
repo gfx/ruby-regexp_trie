@@ -22,9 +22,9 @@ See also the original [Regexp::Trie in Perl](https://metacpan.org/pod/Regexp::Tr
 
 ## Description
 
-RegexpTrie takes an arbitrary number of regular expressions and assembles them into a single regular expression (or RE) that matches all that the individual REs match.
+`RegexpTrie` takes an arbitrary number of regular expressions and assembles them into a single regular expression (or RE) that matches all that the individual REs match.
 
-In other words, this library provides a limited but optimized version of `Regexp.union()`.
+In other words, this library provides a limited but optimized version of `Regexp.union()`, even thouh there are some incompatibilities with it.
 
 ## Installation
 
