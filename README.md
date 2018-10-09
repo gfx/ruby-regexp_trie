@@ -34,9 +34,13 @@ Add this line to your application's Gemfile:
 gem 'regexp_trie'
 ```
 
-## Known Issues
+## Incompatibilities with the built-in `Regexp.union()`
 
-This is not perfectly compatible with `Regexp.union()`.
+* `RegexpTrie` handles only literals. i.e. `RegexpTrie.union("foo.*bar")` produces `/foo\.\*bar/`, not `/foo.*bar/`
+* `RegexpTrie` cannot handle empty strings.
+* The order of words does not matter:
+  * `Regexp.union("foo", "foobar").match("foobar") # => #<MatchData "foo">`
+  * `RegexpTrie.union("foo", "foobar").match("foobar") # => #<MatchData "foobar">`
 
 ## Development
 
