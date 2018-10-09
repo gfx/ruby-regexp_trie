@@ -1,3 +1,5 @@
+# frozen_string_literal
+
 require_relative "regexp_trie/version"
 
 class RegexpTrie
