@@ -7,7 +7,7 @@ class RegexpTrie
   # Factly method to call `new(*strings).to_regexp(option)` in short.
   #
   # @param [Array<String>] strings Set of patterns
-  # @param [Fixnum,Boolean] option The second argument of `Regexp.new()` passed to build a regexp instance
+  # @param [Integer,Boolean] option The second argument of `Regexp.new()` passed to build a regexp instance
   # @return [Regexp]
   def self.union(*strings, option: nil)
     new(*strings).to_regexp(option)
