@@ -1,4 +1,4 @@
-# RegexpTrie [![Build Status](https://travis-ci.org/gfx/ruby-regexp_trie.svg?branch=master)](https://travis-ci.org/gfx/ruby-regexp_trie) [![Gem Version](https://badge.fury.io/rb/regexp_trie.svg)](https://badge.fury.io/rb/regexp_trie)
+# RegexpTrie [![CI](https://github.com/gfx/ruby-regexp_trie/actions/workflows/CI.yml/badge.svg)](https://github.com/gfx/ruby-regexp_trie/actions/workflows/CI.yml) [![Gem Version](https://badge.fury.io/rb/regexp_trie.svg)](https://badge.fury.io/rb/regexp_trie)
 
 ## Synopsis
 
