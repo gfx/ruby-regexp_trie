@@ -1,5 +1,11 @@
 Revision history of the RegexpTrie gem
 
+## v1.0.3 - 2022/09/21
+
+* Reduced the size of the gem package from 5.1MB to 8.5KB
+  * https://github.com/gfx/ruby-regexp_trie/pull/6 (by @pocke)
+* Tested on Ruby 3.1
+
 ## v1.0.2 - 2018/10/09
 
 * Tested on Ruby v2.5
